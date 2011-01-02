@@ -50,15 +50,66 @@ __END__
 
 =head1 NAME
 
-Log::Initial -
+Log::Initial - very simple logger
 
 =head1 SYNOPSIS
 
   use Log::Initial;
+  
+  # usual usage
+  I('This is message.');
+
+  # dump array or hash ref
+  $array_ref = [qw(aaa bbb)];
+  I($array_ref);
+  
+  $hash_ref = {
+    aaa => 'bbb',
+    ccc => 'ddd',
+  };
+  I($hash_ref);
 
 =head1 DESCRIPTION
 
-Log::Initial is
+Log::Initial is very simple logger, but high functionality.
+
+=head2 METHODS
+
+  D( ... ); # debug, no output by default 
+  I( ... ); # info
+  W( ... ); # warning
+  E( ... ); # error
+  F( ... ); # fatal, automatically exit(1)
+
+=head2 VARIABLES
+
+=item *
+
+$DEBUG I<[0|1]> (default:0)
+
+Debug message doesn't output by default. 
+
+  D( ... ); # no output
+
+  $Log::Initial::DEBUG = 1;
+
+  D( ... ); # output
+
+=item *
+
+$FH I<*FILEHANDLE> (default:*STDOUT)
+
+Log message output to STDOUT by default.
+
+  use IO::File;
+  use Log::Initial;
+  
+  my $fh = IO::File->new('/path/to.log', 'a');
+  $Log::Initial::FH = $fh;
+  I( ... );
+  $fh->close;
+
+=back
 
 =head1 AUTHOR
 
