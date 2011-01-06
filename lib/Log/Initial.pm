@@ -32,14 +32,13 @@ sub _log {
     my $buf = '';
 
     for (@_) {
-        if (ref) {
-            $_ = Dumper $_;
-        }
+        my $msg = ref $_ ? Dumper $_ : $_;
+
         $buf .= sprintf(
             "[%s] [%s] %s(%d): %s\n",
             scalar localtime,
             $S, $F, $L, $_,
-        ) for (split /\n/);
+        ) for (split /\n/, $msg);
     }
 
     print {$FH} $buf;
