@@ -23,7 +23,7 @@ sub _log {
     local $Data::Dumper::Indent   = 1;
     local $Data::Dumper::Sortkeys = 1;
     local $Data::Dumper::Terse    = 1;
-    
+
     my ($F, $L, $S) = (caller 1)[1..3];
 
     $F =~ s#.*/##;
@@ -54,14 +54,14 @@ Log::Initial - very simple logger
 =head1 SYNOPSIS
 
   use Log::Initial;
-  
+
   # usual usage
   I('This is message.');
 
   # dump array or hash ref
   $array_ref = [qw(aaa bbb)];
   I($array_ref);
-  
+
   $hash_ref = {
     aaa => 'bbb',
     ccc => 'ddd',
@@ -74,7 +74,7 @@ Log::Initial is very simple logger, but high functionality.
 
 =head2 METHODS
 
-  D( ... ); # debug, no output by default 
+  D( ... ); # debug, no output by default
   I( ... ); # info
   W( ... ); # warning
   E( ... ); # error
@@ -82,11 +82,13 @@ Log::Initial is very simple logger, but high functionality.
 
 =head2 VARIABLES
 
+=over 4
+
 =item *
 
 $DEBUG I<[0|1]> (default:0)
 
-Debug message doesn't output by default. 
+Debug message doesn't output by default.
 
   D( ... ); # no output
 
@@ -102,7 +104,7 @@ Log message output to STDOUT by default.
 
   use IO::File;
   use Log::Initial;
-  
+
   my $fh = IO::File->new('/path/to.log', 'a');
   $Log::Initial::FH = $fh;
   I( ... );
